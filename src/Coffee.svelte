@@ -1,21 +1,39 @@
 <script>
+  import { fade } from "svelte/transition";
   import Controls from "./Controls.svelte";
   import Vapour from "./Vapour.svelte";
+  import Plate from "./Plate.svelte";
+
+  let plate = false;
+  let message = false;
 
   let value = 1;
   const animate = (e) => {
     value = e.detail;
   };
+
+  const togglePlate = () => (plate = !plate);
+  const showMessage = () => (message = !message);
 </script>
 
-<Controls on:slide={animate} />
+<Controls
+  on:slide={animate}
+  on:plate={togglePlate}
+  on:showmessage={showMessage} />
 
 <div class="container">
-  <div class="plate" />
+  {#if plate}
+    <Plate />
+  {/if}
   <div class="cup">
     <div class="vapour" style="filter: blur({value}px);">
       <Vapour />
     </div>
+    {#if message}
+      <div transition:fade class="message">
+        <p contenteditable>It's not a mug. It's a feature.</p>
+      </div>
+    {/if}
     <div class="top">
       <div class="circle">
         <div class="tea" style="top:{value * 2.5}px" />
@@ -49,6 +67,19 @@
     background: linear-gradient(to right, #f9f9f9, #d9d9d9);
     border-bottom-left-radius: 45%;
     border-bottom-right-radius: 45%;
+  }
+  .message {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 100%;
+    padding: 0 1em;
+    transform: translate(-50%);
+    text-align: center;
+    font-family: cursive;
+    font-size: 2em;
+    font-weight: bold;
+    z-index: 2;
   }
   .top {
     position: absolute;
@@ -89,41 +120,6 @@
     border-bottom: 25px solid transparent;
     border-radius: 50%;
     transform: rotate(42deg);
-  }
-  .plate {
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 500px;
-    height: 200px;
-    background: linear-gradient(to right, #f9f9f9, #e7e7e7);
-    border-radius: 50%;
-    box-shadow: 0 35px 35px rgba(0, 0, 0, 0.2);
-  }
-  .plate::before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border-radius: 50%;
-    background: linear-gradient(to left, #f9f9f9, #e7e7e7);
-  }
-  .plate::after {
-    content: "";
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    right: 30px;
-    bottom: 30px;
-    background: radial-gradient(
-      rgba(0, 0, 0, 0.2) 25%,
-      transparent,
-      transparent
-    );
-    border-radius: 50%;
   }
   .vapour {
     position: relative;

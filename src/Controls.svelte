@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+
   const dispatch = createEventDispatcher();
   let value = 1;
 </script>
@@ -13,6 +14,10 @@
     bind:value
     min="0"
     max="20" />
+  <div class="btn-group">
+    <button on:click={() => dispatch('plate')}>Use Plate</button>
+    <button on:click={() => dispatch('showmessage')}>Show Message</button>
+  </div>
 </div>
 
 <style>
@@ -114,5 +119,20 @@
   }
   input[type="range"]:focus::-ms-fill-upper {
     background: #c57e65;
+  }
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+  button {
+    padding: 0.5em 1em;
+    background: darkorange;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
   }
 </style>
