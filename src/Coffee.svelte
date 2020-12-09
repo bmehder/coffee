@@ -8,7 +8,7 @@
   };
 </script>
 
-<Controls on:onslide={animate} />
+<Controls on:slide={animate} />
 
 <div class="container">
   <div class="plate" />

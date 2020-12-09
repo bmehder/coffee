@@ -9,7 +9,7 @@
   <input
     name="drink"
     type="range"
-    on:input={() => dispatch('onslide', value)}
+    on:input={() => dispatch('slide', value)}
     bind:value
     min="0"
     max="20" />
