@@ -12,7 +12,7 @@
     type="range"
     on:input={() => dispatch('slide', value)}
     bind:value
-    min="0"
+    min="1"
     max="20" />
   <div class="btn-group">
     <button on:click={() => dispatch('plate')}>Use Plate</button>

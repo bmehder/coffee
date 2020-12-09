@@ -2,4 +2,4 @@
   import Coffee from "./Coffee.svelte";
 </script>
 
-<Coffee />
+<Coffee message="It's not a mug. It's a feature." />

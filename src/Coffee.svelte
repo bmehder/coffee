@@ -4,16 +4,18 @@
   import Vapour from "./Vapour.svelte";
   import Plate from "./Plate.svelte";
 
-  let plate = false;
-  let message = false;
+  export let message = "It's not a mug. It's a feature.";
+
+  let isPlateShowing = false;
+  let isMessageShowing = false;
 
   let value = 1;
   const animate = (e) => {
     value = e.detail;
   };
 
-  const togglePlate = () => (plate = !plate);
-  const showMessage = () => (message = !message);
+  const togglePlate = () => (isPlateShowing = !isPlateShowing);
+  const showMessage = () => (isMessageShowing = !isMessageShowing);
 </script>
 
 <Controls
@@ -22,16 +24,16 @@
   on:showmessage={showMessage} />
 
 <div class="container">
-  {#if plate}
+  {#if isPlateShowing}
     <Plate />
   {/if}
   <div class="cup">
     <div class="vapour" style="filter: blur({value}px);">
       <Vapour />
     </div>
-    {#if message}
+    {#if isMessageShowing}
       <div transition:fade class="message">
-        <p contenteditable>It's not a mug. It's a feature.</p>
+        <p contenteditable>{message}</p>
       </div>
     {/if}
     <div class="top">
