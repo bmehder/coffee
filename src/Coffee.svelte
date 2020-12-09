@@ -61,6 +61,7 @@
   .container {
     position: relative;
     top: 50px;
+    filter: drop-shadow(0 20px 40px #0002);
   }
   .cup {
     position: relative;
